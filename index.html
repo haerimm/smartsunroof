@@ -42,6 +42,18 @@
             font-weight: bold;
         }
 
+        .image-sections {
+            width: 90%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            font-size: 1.0em;
+            font-weight: bold;
+        }
+
         .button-box {
             width: 90%;
             padding: 20px;
@@ -285,10 +297,16 @@
 
     </div>
 
+    <div class="image-sections">
+        <div id="welcome"></div> 
+    </div>
+
     <div class="image-section">
         <img src="https://i.namu.wiki/i/sZBziwB3XQoowT4jtWfRYKmNbcPZR2PXASPrH-8B_SGgszvx8bDBPTL6hban8JN-fIBNrXw929clNkyIb2Uc6p-CBsxBe--tdpQmBPlcjMRHgSak_bDg9ojjkXWdAojOzMJJZNRoXlrTnfmUF784Wg.webp"
             alt="Car Image" class="image-section" />
     </div>
+
+
 
     <div class="button-box">
         <button class="buttond" id="engine_status">시동</button>
@@ -331,7 +349,7 @@
             </div>
             <div class="input-group">
                 <label for="carid">차량 ID :</label>
-                <input type="text" id="carid" placeholder="ID">
+                <input type="password" id="carid" placeholder="ID">
             </div>
             <button class="button" onclick="connect()">CONNECT</button>
         </div>
@@ -347,7 +365,7 @@
     // let socket;
     //      // JSON 파싱한 데이터를 변수에 저장
     let socket;
-
+    let username = "Guest";
 
     let engine_status_v = 0;
     let window_now_v = 100;
@@ -382,7 +400,7 @@
 
     function connectToServer() {
         // WebSocket 연결
-        socket = new WebSocket("wss://51c8-112-218-95-58.ngrok-free.app"); //서버
+        socket = new WebSocket("wss://c546-112-218-95-58.ngrok-free.app"); //서버
 
         // 연결되었을 때
         socket.onopen = function () {
@@ -607,9 +625,9 @@
     }
 
     function connect() {
-        const username = document.getElementById('username').value.trim();
+        username = document.getElementById('username').value.trim();
         const carid = document.getElementById('carid').value.trim();
-        const validCarID = "car";
+        const validCarID = "hrimcar";
 
         if (carid === validCarID) {
             // 시작 창 숨기기
@@ -617,7 +635,7 @@
             connectToServer();
 
             // 사용자 이름 표시
-            //document.getElementById('welcome').innerText = `안녕하세요 ${username}님!`;
+            document.getElementById('welcome').innerText = `안녕하세요 ${username}님!`;
         } else {
             alert("차량 ID가 올바르지 않습니다. 다시 시도해주세요.");
         }
